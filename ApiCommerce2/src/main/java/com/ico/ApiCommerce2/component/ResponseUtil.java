@@ -24,8 +24,6 @@ public class ResponseUtil {
                 .build();
     }
 
-
-
     public ClientResponse clientResponse(Client client)
     {
         return ClientResponse

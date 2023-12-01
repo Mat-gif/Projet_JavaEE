@@ -1,6 +1,6 @@
 package com.ico.ApiCommerce2.request;
 
-import com.ico.ApiCommerce2.entity.Producteur;
+import com.ico.ApiCommerce2.enumeration.CategorieProduit;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,4 +28,10 @@ public class ProduitRequest {
 
     @NotBlank
     private int quantite;
+
+    @NotBlank
+    private CategorieProduit categorie;
+
+    @NotBlank
+    private String producteur;
 }

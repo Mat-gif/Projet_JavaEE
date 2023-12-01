@@ -31,6 +31,7 @@ public class ProfilClientController {
         logger.info("PUT::/api/client/profil : {}", userDetailsUtil.getEmail());
         return new ResponseEntity<>(service.updateClient(request), HttpStatus.OK);
     }
+
     @GetMapping()
     public ResponseEntity afficherClient()
     {

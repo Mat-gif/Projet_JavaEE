@@ -15,7 +15,6 @@ import java.util.Optional;
 
 public interface CommandeRepository extends JpaRepository<Commande, Long> {
 
-
     @Query("SELECT DISTINCT cq.commande FROM ProduitQuantite cq " +
             "INNER JOIN cq.produit p " +
             "INNER JOIN p.producteur pr " +

@@ -1,5 +1,6 @@
 package com.ico.ApiCommerce2.request;
 
+import com.ico.ApiCommerce2.enumeration.CategorieProducteur;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,5 +21,7 @@ public class ProfilProducteurRequest {
     private String adresse;
     @NotBlank
     private String telephone;
+    @NotBlank
+    private CategorieProducteur categorie;
 
 }

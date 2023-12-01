@@ -4,5 +4,7 @@ public enum CategorieProduit {
     POISSON,
     MIEL,
     FRUIT,
-    LEGUMES
+    LEGUMES,
+    VIANDE,
+    AUTRES
 }
