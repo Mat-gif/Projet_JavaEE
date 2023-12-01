@@ -28,4 +28,7 @@ public class ProduitRequest {
 
     @NotBlank
     private int quantite;
+
+    @NotBlank
+    private String producteur;
 }
