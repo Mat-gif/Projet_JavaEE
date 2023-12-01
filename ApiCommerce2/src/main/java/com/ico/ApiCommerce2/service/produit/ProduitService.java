@@ -60,7 +60,7 @@ public class ProduitService {
         produit.setNom(produitRequest.getNom());
         produit.setPrix(produitRequest.getPrix());
         produit.setQuantite(produitRequest.getQuantite());
-
+        produit.setCategorie(produitRequest.getCategorie());
         Producteur producteur = producteurRepository
                 .findByEmail(userDetailsUtil.getEmail())
                 .orElseThrow(() -> new ProfilNotFoundException("Profil not found"));

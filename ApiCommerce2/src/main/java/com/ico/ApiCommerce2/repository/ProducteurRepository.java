@@ -2,6 +2,7 @@ package com.ico.ApiCommerce2.repository;
 
 import com.ico.ApiCommerce2.entity.Producteur;
 import com.ico.ApiCommerce2.entity.Produit;
+import com.ico.ApiCommerce2.enumeration.CategorieProducteur;
 import com.ico.ApiCommerce2.enumeration.Role;
 import com.ico.ApiCommerce2.request.ProduitRequest;
 import com.ico.ApiCommerce2.request.ProfilClientRequest;
@@ -29,8 +30,8 @@ public interface ProducteurRepository  extends JpaRepository<Producteur, String>
 
     @Modifying
     @Transactional
-    @Query("UPDATE Producteur p SET p.nom = :nom, p.prenom = :prenom, p.adresse = :adresse, p.telephone = :telephone WHERE p.email = :email")
-    int updateProducteurByEmail(String email, String nom, String prenom, String adresse, String telephone);
+    @Query("UPDATE Producteur p SET p.nom = :nom, p.prenom = :prenom, p.categorie= :cat ,p.adresse = :adresse, p.telephone = :telephone WHERE p.email = :email")
+    int updateProducteurByEmail(String email, String nom, String prenom, String adresse, String telephone, CategorieProducteur cat);
 
     @Modifying
     @Transactional
@@ -45,6 +46,7 @@ public interface ProducteurRepository  extends JpaRepository<Producteur, String>
         Produit produit = Produit.builder()
                 .nom(produitRequest.getNom())
                 .prix(produitRequest.getPrix())
+                .categorie(produitRequest.getCategorie())
                 .quantite(produitRequest.getQuantite())
                 .description(produitRequest.getDescription())
                 .date_publication( Date.valueOf(LocalDate.now()))

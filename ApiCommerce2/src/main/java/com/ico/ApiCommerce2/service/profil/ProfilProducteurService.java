@@ -36,7 +36,8 @@ public class ProfilProducteurService {
                 request.getNom(),
                 request.getPrenom(),
                 request.getAdresse(),
-                request.getTelephone()
+                request.getTelephone(),
+                request.getCategorie()
         );
 
         if (updatedRows > 0) {

@@ -1,6 +1,7 @@
 package com.ico.ApiCommerce2.response;
 
 
+import com.ico.ApiCommerce2.enumeration.CategorieProduit;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +20,5 @@ public class ProduitResponse {
     private String description;
     private int quantite;
     private Date date_publication;
-
+    private CategorieProduit categorie;
 }

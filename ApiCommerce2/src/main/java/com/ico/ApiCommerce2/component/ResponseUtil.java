@@ -48,6 +48,7 @@ public class ResponseUtil {
                 .description(produit.getDescription())
                 .date_publication( Date.valueOf(LocalDate.now()))
                 .emailProducteur(produit.getProducteur().getEmail())
+                .categorie(produit.getCategorie())
                 .build();
     }
     public  CommandeResponse commandeResponse(Commande commande) {
@@ -100,6 +101,7 @@ public class ResponseUtil {
                                                             .quantite(produit.getQuantite())
                                                             .id(produit.getId())
                                                             .prix(produit.getPrix())
+                                                            .categorie(produit.getCategorie())
                                                             .build();
             produitsResponse.getProduits().add(produitResponse);
 

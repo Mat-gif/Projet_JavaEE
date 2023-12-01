@@ -1,5 +1,6 @@
 package com.ico.ApiCommerce2.entity;
 
+import com.ico.ApiCommerce2.enumeration.CategorieProduit;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -46,6 +47,8 @@ public class Produit {
     @Column(name = "date_publication", updatable = false, nullable = false)
 
     private Date date_publication;
+
+    private CategorieProduit categorie;
 
 
     public void setId(Long id) {
