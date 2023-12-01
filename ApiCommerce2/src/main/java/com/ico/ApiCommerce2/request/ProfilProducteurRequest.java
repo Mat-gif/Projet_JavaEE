@@ -21,7 +21,7 @@ public class ProfilProducteurRequest {
     private String adresse;
     @NotBlank
     private String telephone;
-    @NotBlank
+
     private CategorieProducteur categorie;
 
 }
