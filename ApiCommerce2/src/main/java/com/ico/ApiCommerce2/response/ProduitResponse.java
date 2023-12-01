@@ -21,6 +21,4 @@ public class ProduitResponse {
     private int quantite;
     private Date date_publication;
     private CategorieProduit categorie;
-    private String producteur;
-
 }
