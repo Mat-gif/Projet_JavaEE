@@ -37,7 +37,7 @@ public class  SecurityConfiguration {
                 .authorizeHttpRequests()
                     .requestMatchers("/api/producteur/**").hasRole("PRODUCTEUR")
                     .requestMatchers("/api/client/**").hasRole("CLIENT")
-                    .requestMatchers("/api/auth/**")
+                    .requestMatchers("/api/auth/**","/api/produit")
                     .permitAll()
                     .anyRequest()
                     .authenticated()

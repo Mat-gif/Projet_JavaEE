@@ -4,6 +4,7 @@ import com.ico.ApiCommerce2.component.ResponseUtil;
 import com.ico.ApiCommerce2.component.UserDetailsUtil;
 import com.ico.ApiCommerce2.entity.Producteur;
 import com.ico.ApiCommerce2.entity.Produit;
+import com.ico.ApiCommerce2.enumeration.CategorieProduit;
 import com.ico.ApiCommerce2.exception.ProductNotFoundException;
 import com.ico.ApiCommerce2.exception.ProfilNotFoundException;
 import com.ico.ApiCommerce2.repository.ProducteurRepository;
@@ -50,6 +51,15 @@ public class ProduitService {
                 .orElseThrow(()-> new ProductNotFoundException("Product not found")));
     }
 
+        public ProduitsResponse afficherCategorie(CategorieProduit categorie) throws ProductNotFoundException {
+        List<Produit> produitsParCategorie = produitRepository
+                .findByCategorie(categorie)
+                .orElseThrow(() -> new ProductNotFoundException("Aucun produit trouvé pour cette catégorie"));
+
+        return response.produitsResponse(produitsParCategorie);
+    }
+
+
 
     public ProduitResponse modifier(ProduitRequest produitRequest) throws ProductNotFoundException, ProfilNotFoundException {
         Produit produit = producteurRepository
@@ -94,4 +104,15 @@ public class ProduitService {
         List<Produit> produits = produitRepository.findByProducteur(producteur).orElseThrow(() -> new ProductNotFoundException("Pas de produits") );
         return response.produitsResponse(produits);
     }
+
+    public ProduitsResponse getAllProducts() throws ProductNotFoundException {
+        List<Produit> produits = produitRepository.findAll();
+
+        if (produits.isEmpty()) {
+            throw new ProductNotFoundException("Aucun produit trouvé");
+        }
+
+        return response.produitsResponse(produits);
+    }
+
 }
