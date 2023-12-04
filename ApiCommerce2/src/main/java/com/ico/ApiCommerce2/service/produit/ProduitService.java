@@ -19,6 +19,7 @@ import org.springframework.security.authentication.ProviderNotFoundException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -51,6 +52,7 @@ public class ProduitService {
                 .orElseThrow(()-> new ProductNotFoundException("Product not found")));
     }
 
+    @Transactional
         public ProduitsResponse afficherCategorie(CategorieProduit categorie) throws ProductNotFoundException {
         List<Produit> produitsParCategorie = produitRepository
                 .findByCategorie(categorie)
@@ -60,23 +62,28 @@ public class ProduitService {
     }
 
 
-
     public ProduitResponse modifier(ProduitRequest produitRequest) throws ProductNotFoundException, ProfilNotFoundException {
+//        Produit produit = producteurRepository
+//                .findProduitByIdAndProducteurEmail(produitRequest.getId(),userDetailsUtil.getEmail())
+//                .orElseThrow(()-> new ProductNotFoundException("Product not found"));
+//        // Je met a jour mon Produit
+//        produit.setDescription(produitRequest.getDescription());
+//        produit.setNom(produitRequest.getNom());
+//        produit.setPrix(produitRequest.getPrix());
+//        produit.setQuantite(produitRequest.getQuantite());
+//        produit.setCategorie(produitRequest.getCategorie());
+//        Producteur producteur = producteurRepository
+//                .findByEmail(userDetailsUtil.getEmail())
+//                .orElseThrow(() -> new ProfilNotFoundException("Profil not found"));
+//
+//        producteur.getProduits().add(produit);
+//        producteurRepository.save(producteur);
+
+        produitRepository.updateMyProduit(produitRequest.getNom(), produitRequest.getDescription(), produitRequest.getQuantite(), produitRequest.getPrix(), produitRequest.getId());
         Produit produit = producteurRepository
                 .findProduitByIdAndProducteurEmail(produitRequest.getId(),userDetailsUtil.getEmail())
                 .orElseThrow(()-> new ProductNotFoundException("Product not found"));
-        // Je met a jour mon Produit
-        produit.setDescription(produitRequest.getDescription());
-        produit.setNom(produitRequest.getNom());
-        produit.setPrix(produitRequest.getPrix());
-        produit.setQuantite(produitRequest.getQuantite());
-        produit.setCategorie(produitRequest.getCategorie());
-        Producteur producteur = producteurRepository
-                .findByEmail(userDetailsUtil.getEmail())
-                .orElseThrow(() -> new ProfilNotFoundException("Profil not found"));
 
-        producteur.getProduits().add(produit);
-        producteurRepository.save(producteur);
         return response.produitResponse(produit);
     }
 
