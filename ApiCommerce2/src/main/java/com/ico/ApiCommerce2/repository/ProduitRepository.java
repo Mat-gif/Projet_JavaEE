@@ -2,6 +2,7 @@ package com.ico.ApiCommerce2.repository;
 
 import com.ico.ApiCommerce2.entity.Producteur;
 import com.ico.ApiCommerce2.entity.Produit;
+import com.ico.ApiCommerce2.enumeration.CategorieProduit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +20,7 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
     @Query("SELECT p FROM Produit p WHERE p.id = :id AND p.quantite > :quantite")
     Optional<Produit>  findProductByIdAndQuantityGreaterThan(@Param("id") Long id, @Param("quantite")  int quantite);
 
+
     @Modifying
     @Transactional
     @Query("UPDATE Produit p SET p.nom = :produitRequestNom, p.description = :description, p.quantite = :quantite, p.prix = :prix WHERE p.id = :id")
@@ -27,4 +29,7 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
 
 
 
-}
+
+
+    @Query("SELECT p FROM Produit p WHERE p.categorie = :categorie")
+    Optional<List<Produit>> findByCategorie(@Param("categorie") CategorieProduit categorie);}
