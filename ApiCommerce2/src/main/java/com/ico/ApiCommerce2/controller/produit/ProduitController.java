@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/produit")
+@RequestMapping("/api/client/produit")
 public class ProduitController {    @Autowired
 private final UserDetailsUtil userDetailsUtil;
 
@@ -37,13 +37,13 @@ private final UserDetailsUtil userDetailsUtil;
     public ResponseEntity ResponseEntityafficherProduit(
             @PathVariable @Pattern(regexp = "^[0-9]+$", message = "L'ID doit être un nombre.") String id
     ) throws ProductNotFoundException {
-        logger.info("/api/produit/id/{}  : {}", id,userDetailsUtil.getEmail());
+        logger.info("/api/client/produit/id/{}  : {}", id,userDetailsUtil.getEmail());
         return new ResponseEntity<>(produitService.afficher(id), HttpStatus.OK);
     }
 
     @GetMapping("/all")
     public ResponseEntity<?> getAllProducts() throws ProductNotFoundException {
-        logger.info("/api/produit/all : {}", userDetailsUtil.getEmail());
+        logger.info("/api/client/produit/all : {}", userDetailsUtil.getEmail());
         return new ResponseEntity<>(produitService.getAllProducts(), HttpStatus.OK);
     }
 
@@ -52,7 +52,7 @@ private final UserDetailsUtil userDetailsUtil;
             @PathVariable String categorieStr) throws ProductNotFoundException {
         try {
             CategorieProduit categorie = CategorieProduit.valueOf(categorieStr.toUpperCase());
-            logger.info("/api/produit/categorie/{} : {}", categorie, userDetailsUtil.getEmail());
+            logger.info("/api/client/produit/categorie/{} : {}", categorie, userDetailsUtil.getEmail());
             return new ResponseEntity<>(produitService.afficherCategorie(categorie), HttpStatus.OK);
         } catch (IllegalArgumentException ex) {
             // Gérer les cas où la chaîne n'est pas une valeur valide de l'enum
