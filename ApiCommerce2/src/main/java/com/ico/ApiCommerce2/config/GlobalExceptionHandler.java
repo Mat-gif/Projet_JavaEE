@@ -30,7 +30,6 @@ public class GlobalExceptionHandler implements AccessDeniedHandler, Authenticati
     public void handle(HttpServletRequest request,
                        HttpServletResponse response,
                        AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        // Personnalisez la réponse en cas d'accès refusé (AccessDeniedException)
         String errorMessage = "Access refuse : " + accessDeniedException.getMessage();
         logger.error("Access refuse : {}",accessDeniedException.getMessage());
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
@@ -41,8 +40,6 @@ public class GlobalExceptionHandler implements AccessDeniedHandler, Authenticati
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
-
-        // Personnalisez la réponse en cas d'exception d'authentification (AuthenticationException)
         String errorMessage = "Erreur d'authentification : " + authException.getMessage();
         logger.error("Erreur d'authentification : {}",authException.getMessage());
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
