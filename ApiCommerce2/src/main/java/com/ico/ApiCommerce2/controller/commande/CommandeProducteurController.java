@@ -42,8 +42,7 @@ public class CommandeProducteurController {
     }
 
     @PutMapping("/commande")
-    public ResponseEntity validerCommande(@Valid @RequestBody CommandeRequest request)
-    {
+    public ResponseEntity validerCommande(@Valid @RequestBody CommandeRequest request) throws ProfilNotFoundException {
         logger.info("/api/producteur/commande : {}", userDetailsUtil.getEmail());
         return new ResponseEntity<>(service.changerStatus(request), HttpStatus.OK);
     }

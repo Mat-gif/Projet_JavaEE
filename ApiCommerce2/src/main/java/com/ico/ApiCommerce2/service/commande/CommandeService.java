@@ -66,6 +66,7 @@ public class CommandeService {
                         .build();
                 commandes.add(commande);
                 commandeHashMap.put(emailProducteur, commande);
+                System.out.println(produit.getProducteur().getEmail());
                 notificationService.sendNotification(produit.getProducteur().getToken(),"Commande de "+ client.getNom());
             }
 

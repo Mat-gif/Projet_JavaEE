@@ -9,7 +9,9 @@ import com.ico.ApiCommerce2.entity.ProduitQuantite;
 import com.ico.ApiCommerce2.enumeration.StatusCommande;
 import com.ico.ApiCommerce2.enumeration.StatusProduitQuantite;
 import com.ico.ApiCommerce2.exception.CommandeNotFoundException;
+import com.ico.ApiCommerce2.exception.ProfilExistException;
 import com.ico.ApiCommerce2.exception.ProfilNotFoundException;
+import com.ico.ApiCommerce2.repository.ClientRepository;
 import com.ico.ApiCommerce2.repository.CommandeRepository;
 import com.ico.ApiCommerce2.repository.ProducteurRepository;
 import com.ico.ApiCommerce2.repository.ProduitQuantiteRepository;
@@ -19,6 +21,7 @@ import com.ico.ApiCommerce2.request.ProduitQuantiteRequest;
 import com.ico.ApiCommerce2.request.StatutCommandeRequest;
 import com.ico.ApiCommerce2.response.CommandeResponse;
 import com.ico.ApiCommerce2.response.CommandesResponse;
+import com.ico.ApiCommerce2.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,7 +45,8 @@ public class CommandeProducteurService {
     private final CommandeRepository commandeRepository;
     private final ProducteurRepository producteurRepository;
     private final ProduitQuantiteRepository produitQuantiteRepository;
-
+    private final NotificationService notificationService;
+    private final ClientRepository clientRepository;
     public Object afficher() throws ProfilNotFoundException {
         Producteur producteur = producteurRepository
                 .findByEmail(userDetailsUtil.getEmail())
@@ -58,7 +62,11 @@ public class CommandeProducteurService {
     }
 
     @Transactional
-    public String changerStatus(CommandeRequest request) {
+    public String changerStatus(CommandeRequest request) throws ProfilNotFoundException {
+        Client client = clientRepository.findByEmail(request.getClient_id()).orElseThrow(()->new ProfilNotFoundException("not found"));
+
+
+        notificationService.sendNotification(client.getToken(),"Commande de "+ client.getNom());
 
         int updatedRows = commandeRepository.updateStatusCommande(request.getId(), request.getStatus(), userDetailsUtil.getEmail());
         if (updatedRows > 0) {

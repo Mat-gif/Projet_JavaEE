@@ -20,7 +20,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommandeRequest {
-
     @NotBlank
     private Long id;
     @NotBlank
@@ -29,7 +28,6 @@ public class CommandeRequest {
     private String client_id;
     @NotBlank
     private List<ProduitQuantiteRequest> produits ;
-
     @NotBlank
     private Date date;
 }
