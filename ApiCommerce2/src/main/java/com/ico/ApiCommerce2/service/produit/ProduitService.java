@@ -88,9 +88,9 @@ public class ProduitService {
     }
 
 
-    public SuccessResponse supprimer(ProduitRequest produitRequest) throws ProductNotFoundException, ProfilNotFoundException {
+    public SuccessResponse supprimer(Long id) throws ProductNotFoundException, ProfilNotFoundException {
         Produit produit = producteurRepository
-                .findProduitByIdAndProducteurEmail(produitRequest.getId(),userDetailsUtil.getEmail())
+                .findProduitByIdAndProducteurEmail(id,userDetailsUtil.getEmail())
                 .orElseThrow(()-> new ProductNotFoundException("Product not found"));
 
         Producteur producteur = producteurRepository

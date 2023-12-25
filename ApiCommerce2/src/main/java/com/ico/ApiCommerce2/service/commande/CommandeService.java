@@ -46,7 +46,7 @@ public class CommandeService {
     public CommandesResponse passerCommande(CommandeRequest request) throws ProductNotFoundException, ProfilNotFoundException {
         Client client = clientRepository.findByEmail(userDetailsUtil.getEmail())
                 .orElseThrow(() -> new ProfilNotFoundException("Profil not found"));
-
+/// chopser par profilrepo
         List<Commande> commandes = new ArrayList<>();
         HashMap<String, Commande> commandeHashMap = new HashMap<>();
 
