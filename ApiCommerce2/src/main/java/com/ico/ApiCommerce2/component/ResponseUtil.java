@@ -42,6 +42,7 @@ public class ResponseUtil {
     public ProduitResponse produitResponse(Produit produit)
     {
         return ProduitResponse.builder()
+                .id(produit.getId())
                 .nom(produit.getNom())
                 .prix(produit.getPrix())
                 .quantite(produit.getQuantite())

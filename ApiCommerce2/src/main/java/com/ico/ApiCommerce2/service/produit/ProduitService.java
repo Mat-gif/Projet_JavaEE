@@ -89,16 +89,20 @@ public class ProduitService {
 
 
     public SuccessResponse supprimer(Long id) throws ProductNotFoundException, ProfilNotFoundException {
-        Produit produit = producteurRepository
-                .findProduitByIdAndProducteurEmail(id,userDetailsUtil.getEmail())
-                .orElseThrow(()-> new ProductNotFoundException("Product not found"));
+
 
         Producteur producteur = producteurRepository
                 .findByEmail(userDetailsUtil.getEmail())
                 .orElseThrow(() -> new ProfilNotFoundException("Profil not found"));
+
+        Produit produit = produitRepository
+                .findByIdAndProducteur(id,producteur)
+                .orElseThrow(()-> new ProductNotFoundException("Product not found"));
         // Je met a jour la liste de produit
         producteur.getProduits().remove(produit);
+
         producteurRepository.save(producteur);
+        producteurRepository.flush();
         produitRepository.delete(produit);
         return null;
     }
