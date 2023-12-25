@@ -73,7 +73,7 @@ public class ProduitProducteurController {
             @PathVariable @Pattern(regexp = "^[0-9]+$", message = "L'ID doit être un nombre.") String id
     ) throws ProductNotFoundException, ProfilNotFoundException
     {
-        logger.info("DELETE::/api/producteur/produit : {}", userDetailsUtil.getEmail());
+        logger.info("DELETE::/api/producteur/produit : {}, {}", userDetailsUtil.getEmail(), id);
         return new ResponseEntity<>(produitService.supprimer(Long.parseLong(id)), HttpStatus.OK);
     }
 
