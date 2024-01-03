@@ -101,9 +101,7 @@ public class ProduitService {
         // Je met a jour la liste de produit
         producteur.getProduits().remove(produit);
 
-        producteurRepository.save(producteur);
-        producteurRepository.flush();
-        produitRepository.delete(produit);
+        produitRepository.deleteMyProduit(produit.getId());
         return null;
     }
 
