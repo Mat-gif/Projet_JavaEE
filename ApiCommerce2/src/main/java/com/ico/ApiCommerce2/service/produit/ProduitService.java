@@ -42,6 +42,7 @@ public class ProduitService {
     {
         // J'jaoute un produit
         Produit  produit = producteurRepository.ajoutProduit(produitRequest,userDetailsUtil.getUserDetails());
+        produit.setDelete(false);
         // Je retourne la réponse
         return response.produitResponse(produit);
     }

@@ -50,7 +50,7 @@ public class Produit {
 
     private CategorieProduit categorie;
 
-    private boolean isDelete = false;
+    private boolean isDelete;
 
     public void setId(Long id) {
         this.id = id;
