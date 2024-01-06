@@ -103,7 +103,7 @@ public class ResponseUtil {
                                                             .quantite(produit.getQuantite())
                                                             .id(produit.getId())
                                                             .prix(produit.getPrix())
-                                                            .categorie(produit.getCategorie())
+                                                            .categorie(produit.getCategorie()).isDelete(produit.isDelete())
                                                             .build();
             produitsResponse.getProduits().add(produitResponse);
 
